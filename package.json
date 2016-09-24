@@ -2,6 +2,9 @@
   "name": "ts-format-imports",
   "version": "0.1.0",
   "description": "Typescript import formatter",
+  "files": [
+    "lib/"
+  ],
   "main": "./lib/formatter.js",
   "bin": {
     "ts-format-imports": "./lib/cli.js"

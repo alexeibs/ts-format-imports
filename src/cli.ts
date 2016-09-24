@@ -5,7 +5,7 @@ import {writeSync} from 'fs';
 
 import {formatImports} from './formatter';
 
-export function run(fileNames: string[]) {
+function run(fileNames: string[]) {
   fileNames.forEach(fileName => {
       let fileContent = readFileSync(fileName).toString();
       let outFile: any = openSync(fileName + '.organized', 'w');
@@ -15,3 +15,5 @@ export function run(fileNames: string[]) {
       closeSync(outFile);
   });
 }
+
+run(process.argv.slice(2));
