@@ -4,3 +4,7 @@ node_js:
   - '5'
   - '4'
   - node
+script:
+  - npm run typings
+  - npm run test-ci
+  - npm run coveralls

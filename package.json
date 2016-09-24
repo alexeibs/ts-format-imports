@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "description": "Typescript import formatter",
   "scripts": {
-    "test": "tsd install && tsc && istanbul cover node_modules/jasmine/bin/jasmine.js && remap-istanbul -i coverage/coverage.json -o coverage/html -t html",
-    "dist": "tsc --p tsconfig.release.json"
+    "typings": "tsd install",
+    "test": "tsc && istanbul cover node_modules/jasmine/bin/jasmine.js && remap-istanbul -i coverage/coverage.json -o coverage/html -t html",
+    "dist": "tsc --p tsconfig.release.json",
+    "test-ci": "tsc && istanbul cover node_modules/jasmine/bin/jasmine.js && remap-istanbul -i coverage/coverage.json -o coverage/lcov.info -t lcovonly",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "main": "./lib/formatter.js",
   "bin": {
@@ -32,6 +35,7 @@
     "typescript": "^1.8.10"
   },
   "devDependencies": {
+    "coveralls": "^2.11.14",
     "istanbul": "^0.4.3",
     "jasmine": "^2.4.1",
     "remap-istanbul": "^0.6.4",
