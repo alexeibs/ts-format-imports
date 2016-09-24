@@ -1,0 +1,36 @@
+{
+  "name": "ts-format-imports",
+  "version": "0.1.0",
+  "description": "Typescript import formatter",
+  "main": "./lib/formatter.js",
+  "bin": {
+    "ts-format-imports": "./lib/cli.js"
+  },
+  "scripts": {
+    "test": "tsc && istanbul cover node_modules/jasmine/bin/jasmine.js && remap-istanbul -i coverage/coverage.json -o coverage/html -t html",
+    "dist": "tsc --p tsconfig.release.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexeibs/ts-format-imports.git"
+  },
+  "keywords": [
+    "typescript",
+    "format",
+    "import"
+  ],
+  "author": "Alexei Bykov <alexeibs@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexeibs/ts-format-imports/issues"
+  },
+  "homepage": "https://github.com/alexeibs/ts-format-imports#readme",
+  "dependencies": {
+    "typescript": "^1.8.10"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.3",
+    "jasmine": "^2.4.1",
+    "remap-istanbul": "^0.6.4"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "lib",
+    "removeComments": true
+  },
+  "exclude": [
+    "bin",
+    "coverage",
+    "node_modules",
+    "spec"
+  ]
+}
