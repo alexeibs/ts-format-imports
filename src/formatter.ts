@@ -1,13 +1,18 @@
 import * as ts from 'typescript';
 
 import {ASTExplorer} from './ast-interfaces';
+
 import {ASTPrinter} from './ast-printer';
-import {ImportParser} from './import-parser';
-import {ImportSorter} from './import-sorter';
-import {MainCodeWriter} from './main-code-writer';
 
 import {exploreSourceFile} from './ast-utils';
+
 import {writeImportGroup} from './import-group-writer';
+
+import {ImportParser} from './import-parser';
+
+import {ImportSorter} from './import-sorter';
+
+import {MainCodeWriter} from './main-code-writer';
 
 export function formatImports(filename: string, content: string, verbose: boolean, doWrite: (s: string) => void) {
   let sourceFile = ts.createSourceFile(filename, content, ts.ScriptTarget.ES5, true);

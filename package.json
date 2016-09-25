@@ -32,6 +32,8 @@
   },
   "homepage": "https://github.com/alexeibs/ts-format-imports#readme",
   "dependencies": {
+    "fs-extra": "^0.30.0",
+    "temp": "^0.8.3",
     "typescript": "^1.8.10"
   },
   "devDependencies": {
