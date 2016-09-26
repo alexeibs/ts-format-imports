@@ -9,7 +9,7 @@ function parseImports(filename: string): ParsedImport[] {
   let content = fs.readFileSync(filename).toString();
   let sourceFile = ts.createSourceFile(filename, content, ts.ScriptTarget.ES5, true);
 
-  let parser = new ImportParser;
+  let parser = new ImportParser(content);
   exploreSourceFile(sourceFile, [parser]);
 
   return parser.getImports();
@@ -26,31 +26,31 @@ describe('ImportParser suite', () => {
         identifiers: ['readFileSync'],
         path: 'fs'
       }, {
-        pos: 32,
+        pos: 33,
         end: 66,
         isNamespace: true,
         identifiers: ['ts'],
         path: 'typescript'
       }, {
-        pos: 66,
+        pos: 67,
         end: 107,
         isNamespace: false,
         identifiers: ['class1'],
         path: 'package1/module1'
       }, {
-        pos: 107,
+        pos: 108,
         end: 148,
         isNamespace: false,
         identifiers: ['class2'],
         path: 'package2/module3'
       }, {
-        pos: 148,
+        pos: 149,
         end: 189,
         isNamespace: false,
         identifiers: ['class3'],
         path: 'package1/module1'
       }, {
-        pos: 189,
+        pos: 190,
         end: 223,
         isNamespace: false,
         identifiers: ['class4'],
@@ -69,13 +69,13 @@ describe('ImportParser suite', () => {
         identifiers: ['class1'],
         path: 'package1/module1'
       }, {
-        pos: 40,
+        pos: 41,
         end: 89,
         isNamespace: false,
         identifiers: ['class2', 'class3'],
         path: 'package2/module3'
       }, {
-        pos: 89,
+        pos: 91,
         end: 145,
         isNamespace: false,
         identifiers: ['class4', 'class5'],

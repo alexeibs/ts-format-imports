@@ -4,12 +4,21 @@ import {ASTExplorer} from './ast-interfaces';
 import {ParsedImport} from './ast-interfaces';
 
 export class ImportParser implements ASTExplorer {
+  constructor(text: string) {
+    this.text = text;
+  }
   enterNode(node: ts.Node) {
     ++this.depth;
     if (this.current === null) {
       if (node.kind === ts.SyntaxKind.ImportDeclaration) {
+        let nodeText = this.text.slice(node.pos, node.end);
+        let importStart = nodeText.indexOf('import');
+        /* istanbul ignore if */
+        if (importStart === - 1) {
+          throw 'Incorrect import declaration';
+        }
         this.current = {
-          pos: node.pos,
+          pos: node.pos + importStart,
           end: node.end,
           isNamespace: false,
           identifiers: [],
@@ -45,6 +54,7 @@ export class ImportParser implements ASTExplorer {
     return this.imports;
   }
 
+  private text: string;
   private imports: ParsedImport[] = [];
   private current: ParsedImport = null;
   private depth: number = 0;

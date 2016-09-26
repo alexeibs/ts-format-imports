@@ -2,7 +2,7 @@ import * as fs from 'fs';
 
 import {formatImports} from '../src/formatter';
 
-function defineTest(name: string, inputPath: string, expectPath: string, verbose: boolean) {
+function defineTest(name: string, inputPath: string, verbose: boolean) {
   it(name, () => {
     spyOn(console, 'log');
 
@@ -10,7 +10,7 @@ function defineTest(name: string, inputPath: string, expectPath: string, verbose
     let output: string[] = [];
     formatImports(inputPath, input, verbose, s => output.push(s));
 
-    let expectedOutput = fs.readFileSync(expectPath).toString();
+    let expectedOutput = fs.readFileSync(inputPath + '.expected').toString();
     expect(output.join('')).toEqual(expectedOutput);
 
     if (verbose) {
@@ -22,6 +22,7 @@ function defineTest(name: string, inputPath: string, expectPath: string, verbose
 }
 
 describe('Formatter suite', () => {
-  defineTest('Single identifiers', 'spec/support/test.ts', 'spec/support/test.ts.expected', true);
-  defineTest('Single identifiers', 'spec/support/test2.ts', 'spec/support/test2.ts.expected', false);
+  defineTest('Single identifiers', 'spec/support/test.ts', true);
+  defineTest('Multiple identifiers', 'spec/support/test2.ts', false);
+  defineTest('Code before import section', 'spec/support/test3.ts', false);
 });

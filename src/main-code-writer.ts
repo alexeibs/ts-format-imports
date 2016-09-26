@@ -7,6 +7,17 @@ export class MainCodeWriter {
     this.imports = imports;
   }
 
+  hasHeader(): boolean {
+    return this.imports.length > 0 && this.imports[0].pos > 0;
+  }
+
+  writeHeader(doWrite: (s: string) => void) {
+    if (this.hasHeader()) {
+      let header = this.fileContent.slice(0, this.imports[0].pos).replace(/\s+$/, '\n\n');
+      doWrite(header);
+    }
+  }
+
   write(doWrite: (s: string) => void) {
     let originalDoWrite = doWrite;
     doWrite = (s: string) => {
@@ -22,8 +33,8 @@ export class MainCodeWriter {
       doWrite(this.fileContent);
 
     } else {
-      let pos = 0;
-      for (let i = 0; i < nImports; ++i) {
+      let pos = this.imports[0].end;
+      for (let i = 1; i < nImports; ++i) {
         let parsedImport = this.imports[i];
         doWrite(this.fileContent.slice(pos, parsedImport.pos));
         pos = parsedImport.end;
